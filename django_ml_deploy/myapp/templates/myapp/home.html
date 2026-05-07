@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sports Prediction App</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f4f4;
+            text-align: center;
+            padding-top: 40px;
+        }
+
+        .container {
+            width: 500px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        input[type=file] {
+            margin: 20px;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        img {
+            margin-top: 20px;
+            width: 250px;
+            border-radius: 10px;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 22px;
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Sports Image Prediction</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <input type="file" name="image" accept="image/*" required>
+
+        <br>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if uploaded_image %}
+        <img src="{{ uploaded_image }}" alt="Uploaded Image">
+    {% endif %}
+
+   
+
+    {% if result %}
+
+<h2 style="margin-top:30px;">Top Predictions</h2>
+
+<div style="margin-top:20px;">
+
+    {% for item in result %}
+
+    <div style="
+        background:#f8f8f8;
+        margin:15px auto;
+        padding:20px;
+        border-radius:10px;
+        width:300px;
+        box-shadow:0px 0px 10px rgba(0,0,0,0.1);
+    ">
+
+        <h3>{{ item.class }}</h3>
+
+        <div style="
+            background:#ddd;
+            border-radius:20px;
+            overflow:hidden;
+            height:25px;
+        ">
+
+            <div style="
+                width:{{ item.confidence }}%;
+                background:#4CAF50;
+                height:25px;
+                color:white;
+                text-align:center;
+            ">
+                {{ item.confidence }}%
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endif %}
+
+</div>
+
+</body>
+</html>
