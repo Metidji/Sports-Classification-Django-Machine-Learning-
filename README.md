@@ -82,7 +82,7 @@ User → Django Web Interface → Image Preprocessing → CNN Model → Softmax 
 
 ```bash
 git clone https://github.com/Metidji/Sports-Classification-Django-Machine-Learning-.git
-cd Sports-Classification-Django-Machine-Learning
+cd Sports-Classification-Django-Machine-Learning/django_ml_deploy
 ```
 
 ---
